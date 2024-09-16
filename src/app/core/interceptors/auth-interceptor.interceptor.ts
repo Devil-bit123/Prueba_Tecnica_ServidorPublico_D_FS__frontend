@@ -9,8 +9,6 @@ export const authInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
   let request = req;
 
   if (token) {
-    console.log('Token:', token);
-
     try {
       request = req.clone({
         setHeaders: {

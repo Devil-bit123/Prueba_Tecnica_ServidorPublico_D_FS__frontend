@@ -8,6 +8,14 @@ import { routes } from './app/app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CookieService } from 'ngx-cookie-service';
 import { authInterceptorInterceptor } from './app/core/interceptors/auth-interceptor.interceptor';
+import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { FormsModule } from '@angular/forms';
+import { importProvidersFrom } from '@angular/core';
+
+
+registerLocaleData(en);
 
 bootstrapApplication(AppComponent,{...appConfig,
   providers:[
@@ -15,7 +23,8 @@ bootstrapApplication(AppComponent,{...appConfig,
     provideAnimations(),
     provideHttpClient(withInterceptors([authInterceptorInterceptor])),
     provideAnimationsAsync(),
-    CookieService
+    CookieService, provideNzI18n(en_US), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient(),
+
   ]
 } )
   .catch((err) => console.error(err));

@@ -1,10 +1,9 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { inject, Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { Modules } from '../interfaces/modules';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +19,25 @@ export class ModuleService {
   menuItems$ = this.newMenu.asObservable();
   activeComponent$ = this.activeComponentSource.asObservable();
 
-  constructor() {}
+  constructor() {
+    // Llama a la API y carga los datos al inicializar el servicio
+    this.loadModules();
+  }
+
+  private loadModules(): void {
+    this.GetModulesFromDb().subscribe(
+      items => this.newMenu.next(items),
+      error => console.error('Error loading modules:', error)
+    );
+  }
 
   toggleVisibility(itemName: string): void {
-    // Desactiva cualquier opción visible y activa la seleccionada en un solo paso
     const updatedMenuItems = this.newMenu.value.map(item => ({
       ...item,
       visibilityStatus: item.name === itemName ? 'true' : 'false'
     }));
-
-    // Actualiza el estado del menú con los cambios
     this.newMenu.next(updatedMenuItems);
-
-    // Actualiza el componente activo
-    const activeItem = updatedMenuItems.find(
-      (item) => item.visibilityStatus === 'true'
-    );
+    const activeItem = updatedMenuItems.find(item => item.visibilityStatus === 'true');
     this.activeComponentSource.next(activeItem ? activeItem.name : '');
   }
 
@@ -43,19 +45,8 @@ export class ModuleService {
     return this.http.get<Modules[]>(`${this.baseUrl}modules`).pipe(
       catchError(error => {
         console.error('Error fetching modules:', error);
-        return throwError(() => new Error('Failed to fetch modules'));
+        return of([]); // Retorna un array vacío en caso de error
       })
     );
   }
-
-  // GetModulesFromDb(): Observable<Modules[]> {
-  //   return this.http.get<Modules[]>(`${this.baseUrl}modules`).pipe(
-  //     tap((modules: any) => console.log('Modules fetched:', modules)),  // Log de los módulos obtenidos
-  //     catchError(error => {
-  //       console.error('Error fetching modules:', error);
-  //       return throwError(() => new Error('Failed to fetch modules'));
-  //     })
-  //   );
-  // }
-
 }
