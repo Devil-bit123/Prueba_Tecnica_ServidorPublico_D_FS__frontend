@@ -1,4 +1,4 @@
-<nz-layout>
+<!-- <nz-layout>
 
   <nz-header>
     <div nz-row style="align-items: center;">
@@ -15,7 +15,6 @@
       </div>
     </div>
   </nz-header>
-
 
   <nz-content>
 
@@ -39,10 +38,42 @@
 
   </nz-content>
   <nz-footer>
-    <!-- Customize footer content -->
+
 
   </nz-footer>
 </nz-layout>
 
 
+ -->
 
+
+ <nz-layout>
+  <nz-header>
+    <div nz-row style="align-items: center;">
+      <!-- Columna para el drawer -->
+      <div nz-col nzSpan="6" style="display: flex; align-items: center; gap: 20px;">
+        <app-drawer></app-drawer>
+        <button (click)="logOut()" mat-flat-button>Log out</button>
+      </div>
+
+    </div>
+  </nz-header>
+
+  <nz-content>
+    <div *ngIf="activeComponent$ | async as activeComponent">
+      <app-index-autors *ngIf="activeComponent === 'autors'"></app-index-autors>
+    </div>
+
+    <div *ngIf="activeComponent$ | async as activeComponent">
+      <app-index-libros *ngIf="activeComponent === 'libros'"></app-index-libros>
+    </div>
+
+    <div *ngIf="activeComponent$ | async as activeComponent">
+      <app-covid-dashboard *ngIf="activeComponent === 'covid_dashboard_views'"></app-covid-dashboard>
+    </div>
+  </nz-content>
+
+  <nz-footer>
+    <!-- Customize footer content -->
+  </nz-footer>
+</nz-layout>

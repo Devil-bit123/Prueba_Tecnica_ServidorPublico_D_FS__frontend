@@ -31,27 +31,57 @@ export class ModuleService {
     );
   }
 
+  // toggleVisibility(itemName: string): void {
+  //   // Actualiza el estado de visibilidad de los ítems
+  //   const updatedMenuItems = this.newMenu.value.map(item => {
+  //     if (item.name === itemName) {
+  //       // Alterna la visibilidad: si es 'true', cambia a 'false', y viceversa
+  //       return {
+  //         ...item,
+  //         visibilityStatus: item.visibilityStatus === 'true' ? 'false' : 'true'
+  //       };
+  //     } else {
+  //       // Mantiene el estado de visibilidad actual para los ítems que no coinciden
+  //       return item;
+  //     }
+  //   });
+
+  //   // Actualiza el observable con los ítems modificados
+  //   this.newMenu.next(updatedMenuItems);
+
+  //   // Encuentra el ítem activo (el que está visible) y actualiza el estado activo
+  //   const activeItem = updatedMenuItems.find(item => item.visibilityStatus === 'true');
+  //   this.activeComponentSource.next(activeItem ? activeItem.name : '');
+  // }
+
+
   toggleVisibility(itemName: string): void {
-    // Actualiza el estado de visibilidad de los ítems
+    // Actualiza el estado de visibilidad de todos los ítems
     const updatedMenuItems = this.newMenu.value.map(item => {
+      // Desactiva todos los ítems
+      return {
+        ...item,
+        visibilityStatus: 'false'
+      };
+    });
+
+    // Activa el ítem seleccionado
+    const updatedMenuItemsWithActive = updatedMenuItems.map(item => {
       if (item.name === itemName) {
-        // Alterna la visibilidad: si es 'true', cambia a 'false', y viceversa
         return {
           ...item,
-          visibilityStatus: item.visibilityStatus === 'true' ? 'false' : 'true'
+          visibilityStatus: 'true'
         };
       } else {
-        // Mantiene el estado de visibilidad actual para los ítems que no coinciden
         return item;
       }
     });
 
     // Actualiza el observable con los ítems modificados
-    this.newMenu.next(updatedMenuItems);
+    this.newMenu.next(updatedMenuItemsWithActive);
 
-    // Encuentra el ítem activo (el que está visible) y actualiza el estado activo
-    const activeItem = updatedMenuItems.find(item => item.visibilityStatus === 'true');
-    this.activeComponentSource.next(activeItem ? activeItem.name : '');
+    // Establece el ítem activo (el que está visible)
+    this.activeComponentSource.next(itemName);
   }
 
 
