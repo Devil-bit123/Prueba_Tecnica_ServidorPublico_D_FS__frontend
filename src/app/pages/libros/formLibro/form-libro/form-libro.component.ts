@@ -62,8 +62,8 @@ export class FormLibroComponent {
     this.reciveActionModel();
     this.loadAutores();
 
-    console.log('accion',this.action);
-    console.log('libro',this.libro);
+    //console.log('accion',this.action);
+    //console.log('libro',this.libro);
 
   }
 
@@ -116,7 +116,7 @@ export class FormLibroComponent {
         this.form.disable();
         break;
       default:
-        console.log('Acción no reconocida');
+        console.error('Acción no reconocida');
         break;
     }
   }

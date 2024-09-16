@@ -84,7 +84,7 @@ export class FormAutorComponent {
         break;
 
       default:
-        console.log('Acción no reconocida');
+        console.error('Acción no reconocida');
         break;
     }
   }

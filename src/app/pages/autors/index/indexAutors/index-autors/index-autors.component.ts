@@ -78,7 +78,7 @@ export class IndexAutorsComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
       if(result==='correcto'){
         this.getAutores();
       }
