@@ -56,4 +56,10 @@ export class DrawerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.menuItemsSubscription.unsubscribe();
   }
+
+  toggleVisibility(itemName: string): void {
+    //console.log(itemName);
+    this.menuService.toggleVisibility(itemName);
+  }
+
 }

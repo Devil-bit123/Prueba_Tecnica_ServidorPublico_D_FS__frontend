@@ -32,14 +32,28 @@ export class ModuleService {
   }
 
   toggleVisibility(itemName: string): void {
-    const updatedMenuItems = this.newMenu.value.map(item => ({
-      ...item,
-      visibilityStatus: item.name === itemName ? 'true' : 'false'
-    }));
+    // Actualiza el estado de visibilidad de los ítems
+    const updatedMenuItems = this.newMenu.value.map(item => {
+      if (item.name === itemName) {
+        // Alterna la visibilidad: si es 'true', cambia a 'false', y viceversa
+        return {
+          ...item,
+          visibilityStatus: item.visibilityStatus === 'true' ? 'false' : 'true'
+        };
+      } else {
+        // Mantiene el estado de visibilidad actual para los ítems que no coinciden
+        return item;
+      }
+    });
+
+    // Actualiza el observable con los ítems modificados
     this.newMenu.next(updatedMenuItems);
+
+    // Encuentra el ítem activo (el que está visible) y actualiza el estado activo
     const activeItem = updatedMenuItems.find(item => item.visibilityStatus === 'true');
     this.activeComponentSource.next(activeItem ? activeItem.name : '');
   }
+
 
   GetModulesFromDb(): Observable<Modules[]> {
     return this.http.get<Modules[]>(`${this.baseUrl}modules`).pipe(

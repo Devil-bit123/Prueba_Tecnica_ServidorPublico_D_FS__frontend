@@ -10,9 +10,9 @@
 
         @for (item of menuItems; track $index) {
           <div style="display: flex; flex-direction: column; margin: 10px auto;">
-            <ng-container *appPermission="'browse_' + item.name">
+            <ng-container *appPermission="'browse_' + item.name" >
 
-              <button nz-button nzType="primary">{{item.name}}</button>
+              <button (click)="toggleVisibility(item.name)" nz-button nzType="primary">{{item.name}}</button>
 
             </ng-container>
 

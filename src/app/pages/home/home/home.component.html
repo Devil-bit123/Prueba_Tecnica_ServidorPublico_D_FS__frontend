@@ -19,11 +19,11 @@
 
   <nz-content>
 
-      <!-- <div *ngIf="activeComponent$ | async as activeComponent">
-        <app-boletos
-          *ngIf="activeComponent === language.menu_option_module_name_Boletos"
-        ></app-boletos>
-      </div> -->
+      <div *ngIf="activeComponent$ | async as activeComponent">
+        <app-index-autors
+          *ngIf="activeComponent === 'autors'"
+        ></app-index-autors>
+      </div>
 
   </nz-content>
   <nz-footer>

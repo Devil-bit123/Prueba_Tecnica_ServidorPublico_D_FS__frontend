@@ -86,10 +86,10 @@ export class PermissionDirective implements OnInit {
 
   private checkPermission(): void {
     if (this.permissionsArray.includes(this.permission)) {
-      console.log('tiene permiso');
+      //console.log('tiene permiso');
       this.viewContainerRef.createEmbeddedView(this.templateRef);
     } else {
-      console.log('no tiene permiso');
+      //console.log('no tiene permiso');
       this.viewContainerRef.clear();
     }
   }
