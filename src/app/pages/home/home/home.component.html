@@ -25,6 +25,12 @@
         ></app-index-autors>
       </div>
 
+      <div *ngIf="activeComponent$ | async as activeComponent">
+        <app-index-libros
+          *ngIf="activeComponent === 'libros'"
+        ></app-index-libros>
+      </div>
+
   </nz-content>
   <nz-footer>
     <!-- Customize footer content -->

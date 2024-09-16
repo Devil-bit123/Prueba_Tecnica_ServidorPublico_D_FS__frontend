@@ -4,11 +4,12 @@ import { DrawerComponent } from "../../../components/drawer/drawer/drawer.compon
 import { IndexAutorsComponent } from "../../autors/index/indexAutors/index-autors/index-autors.component";
 import { CommonModule } from '@angular/common';
 import { ModuleService } from '../../../core/services/module.service';
+import { IndexLibrosComponent } from "../../libros/index/index-libros/index-libros.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NzLayoutModule, DrawerComponent, IndexAutorsComponent, CommonModule],
+  imports: [NzLayoutModule, DrawerComponent, IndexAutorsComponent, CommonModule, IndexLibrosComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

@@ -12,11 +12,6 @@
     <input matInput formControlName="nombres" />
   </mat-form-field>
 
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Fecha de Nacimiento</mat-label>
-    <input matInput formControlName="fechaNacimiento" type="date" />
-  </mat-form-field> -->
-
   <mat-form-field appearance="fill">
     <mat-label>Fecha de Nacimiento</mat-label>
     <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">

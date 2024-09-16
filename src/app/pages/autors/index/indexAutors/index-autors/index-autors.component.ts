@@ -82,8 +82,7 @@ export class IndexAutorsComponent {
       if(result==='correcto'){
         this.getAutores();
       }
-
-
     });
   }
+
 }
