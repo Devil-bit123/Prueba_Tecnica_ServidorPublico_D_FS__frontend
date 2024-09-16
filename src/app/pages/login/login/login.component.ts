@@ -19,6 +19,8 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
+  key = 'czB6yjT6rgEG5bkEDKGwRzqVmZx5ciTa';
+
   /**
    *
    */
@@ -35,7 +37,9 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe({
+      const originalText = this.loginForm.value.password;
+      const encryptedText = this.xorCipher(originalText, this.key);
+      this.authService.login(email, encryptedText).subscribe({
         next: (response) => {
           //console.log('Login successful', response);
           this._cookieService.set('usrLogtkn', response.token);
@@ -48,6 +52,16 @@ export class LoginComponent {
         }
       });
     }
+  }
+
+
+  xorCipher(text: string, key: string): string {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      // Cifra y descifra usando XOR entre el carácter del texto y el carácter de la clave
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return result;
   }
 
 }
