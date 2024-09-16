@@ -12,6 +12,8 @@ import { PermissionDirective } from '../../../../../core/directives/permission.d
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormAutorComponent } from '../../../formAutor/form-autor/form-autor.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-index-autors',
   standalone: true,
@@ -24,7 +26,9 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     MatPaginatorModule,
     PermissionDirective,
     NzButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    CommonModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index-autors.component.html',
@@ -38,6 +42,7 @@ export class IndexAutorsComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   readonly dialog = inject(MatDialog);
+  itsLoading=false;
 
   constructor(private _autorService: AutoresService) {
     this.getAutores();
@@ -58,9 +63,11 @@ export class IndexAutorsComponent {
   }
 
   getAutores() {
+    this.itsLoading=true;
     this._autorService.GetAutores().subscribe({
       next: (data) => {
         this.dataSource.data = data;
+        this.itsLoading=false;
         //console.log(this.dataSource.data);
       },
       error: (error) => {
