@@ -39,4 +39,8 @@ getUserFromCookie(): UserResponse | null {
   return userInfo ? JSON.parse(userInfo) : null;
 }
 
+logout(){
+  return this.http.post<any>(`${this.baseUrl}logout`,null);
+}
+
 }

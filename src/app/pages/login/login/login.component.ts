@@ -37,9 +37,9 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
         next: (response) => {
-          console.log('Login successful', response);
+          //console.log('Login successful', response);
           this._cookieService.set('usrLogtkn', response.token);
-          console.log('token', this._cookieService.get('usrLogtkn'));
+          //console.log('token', this._cookieService.get('usrLogtkn'));
           this.router.navigate(['home']);
         },
         error: (error) => {

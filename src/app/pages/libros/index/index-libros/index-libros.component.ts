@@ -76,7 +76,7 @@ export class IndexLibrosComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      //console.log(`Dialog result: ${result}`);
       if (result && result.success) {
         this.getLibros();
       }
