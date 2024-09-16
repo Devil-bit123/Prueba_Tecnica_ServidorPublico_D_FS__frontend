@@ -5,11 +5,12 @@ import { IndexAutorsComponent } from "../../autors/index/indexAutors/index-autor
 import { CommonModule } from '@angular/common';
 import { ModuleService } from '../../../core/services/module.service';
 import { IndexLibrosComponent } from "../../libros/index/index-libros/index-libros.component";
+import { CovidDashboardComponent } from "../../covidDashboard/covid-dashboard/covid-dashboard.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NzLayoutModule, DrawerComponent, IndexAutorsComponent, CommonModule, IndexLibrosComponent],
+  imports: [NzLayoutModule, DrawerComponent, IndexAutorsComponent, CommonModule, IndexLibrosComponent, CovidDashboardComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

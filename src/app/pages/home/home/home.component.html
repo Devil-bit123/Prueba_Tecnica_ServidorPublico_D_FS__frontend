@@ -31,10 +31,16 @@
         ></app-index-libros>
       </div>
 
+      <div *ngIf="activeComponent$ | async as activeComponent">
+        <app-covid-dashboard
+          *ngIf="activeComponent === 'covid_dashboard_views'"
+        ></app-covid-dashboard>
+      </div>
+
   </nz-content>
   <nz-footer>
     <!-- Customize footer content -->
-    Footer
+
   </nz-footer>
 </nz-layout>
 
