@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <input
+    style="display: none"
+    matInput
+    formControlName="id"
+    [attr.disabled]="action === 'read' ? true : null"
+  />
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombres</mat-label>
+    <input matInput formControlName="nombres" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de Nacimiento</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-button type="submit" [disabled]="form.invalid">
+      {{ buttonSubmit }}
+    </button>
+  </div>
+</form>

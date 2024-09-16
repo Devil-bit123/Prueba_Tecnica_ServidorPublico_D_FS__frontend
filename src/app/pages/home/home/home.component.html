@@ -1,0 +1,48 @@
+<nz-layout>
+
+  <nz-header>
+    <div nz-row style="align-items: center;">
+      <div nz-col nzSpan="6">
+        <app-drawer></app-drawer>
+      </div>
+
+      <div nz-col nzSpan="6" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+
+      </div>
+
+      <div nz-col nzSpan="6" style="display: flex; align-items: center; justify-content: center;">
+
+      </div>
+    </div>
+  </nz-header>
+
+
+  <nz-content>
+
+      <div *ngIf="activeComponent$ | async as activeComponent">
+        <app-index-autors
+          *ngIf="activeComponent === 'autors'"
+        ></app-index-autors>
+      </div>
+
+      <div *ngIf="activeComponent$ | async as activeComponent">
+        <app-index-libros
+          *ngIf="activeComponent === 'libros'"
+        ></app-index-libros>
+      </div>
+
+      <div *ngIf="activeComponent$ | async as activeComponent">
+        <app-covid-dashboard
+          *ngIf="activeComponent === 'covid_dashboard_views'"
+        ></app-covid-dashboard>
+      </div>
+
+  </nz-content>
+  <nz-footer>
+    <!-- Customize footer content -->
+
+  </nz-footer>
+</nz-layout>
+
+
+
