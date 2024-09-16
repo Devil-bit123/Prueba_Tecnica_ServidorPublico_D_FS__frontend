@@ -49,6 +49,7 @@ export class HomeComponent {
         this.itsLoading=false;
         this.cookieService.deleteAll();
         this.router.navigate(['']);
+        this.menuService.toggleOffAllItems();
       },
       error: (error) => {
         console.error(error);

@@ -84,6 +84,20 @@ export class ModuleService {
     this.activeComponentSource.next(itemName);
   }
 
+  toggleOffAllItems(): void {
+    // Actualiza el estado de visibilidad de todos los ítems a 'false'
+    const updatedMenuItems = this.newMenu.value.map(item => ({
+      ...item,
+      visibilityStatus: 'false'
+    }));
+
+    // Actualiza el observable con los ítems modificados
+    this.newMenu.next(updatedMenuItems);
+
+    // Limpia el ítem activo ya que todos están desactivados
+    this.activeComponentSource.next('');
+  }
+
 
   GetModulesFromDb(): Observable<Modules[]> {
     return this.http.get<Modules[]>(`${this.baseUrl}modules`).pipe(
