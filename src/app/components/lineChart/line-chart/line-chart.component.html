@@ -3,6 +3,13 @@
   <div class="card-body">
     <div id="main" style="width: 900px; height: 400px;"></div>
   </div>
+  <p>Cantidad de datos: {{data.length}}</p>
 </div>
 
-<p>Cantidad de datos: {{data.length}}</p>
+
+
+
+<ng-container *ngIf="itsLoading">
+  <mat-spinner></mat-spinner>
+
+</ng-container>

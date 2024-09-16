@@ -1,20 +1,25 @@
 import { Component } from '@angular/core';
 import * as echarts from 'echarts';
 import { DashboardService } from '../../../core/services/dashboard/dashboard.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-line-chart',
   standalone: true,
-  imports: [],
+  imports: [MatProgressSpinnerModule, CommonModule],
   templateUrl: './line-chart.component.html',
   styleUrl: './line-chart.component.css'
 })
 export class LineChartComponent {
   data: any[] = [];
+  itsLoading=false;
 
   constructor(private covidDataService: DashboardService) { }
 
   ngOnInit(): void {
+    this.itsLoading=true;
     this.covidDataService.getData().subscribe(data => {
+      this.itsLoading=false;
       this.data = data;
       this.initChart();
     });

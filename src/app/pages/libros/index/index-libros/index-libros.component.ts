@@ -11,6 +11,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Libro } from '../../../../core/interfaces/libro';
 import { LibroService } from '../../../../core/services/libros/libro.service';
 import { FormLibroComponent } from '../../formLibro/form-libro/form-libro.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-index-libros',
@@ -23,7 +25,10 @@ import { FormLibroComponent } from '../../formLibro/form-libro/form-libro.compon
     MatPaginatorModule,
     PermissionDirective,
     NzButtonModule,
-    MatDialogModule],
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    CommonModule
+  ],
   templateUrl: './index-libros.component.html',
   styleUrl: './index-libros.component.css'
 })
@@ -36,6 +41,8 @@ export class IndexLibrosComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   readonly dialog = inject(MatDialog);
+
+  itsLoading=false
 
   constructor(private _libroService: LibroService) {
     this.getLibros();
@@ -56,8 +63,10 @@ export class IndexLibrosComponent {
   }
 
   getLibros() {
+    this.itsLoading=true;
     this._libroService.GetLibros().subscribe({
       next: (data) => {
+        this.itsLoading=false;
         this.dataSource.data = data;
         //console.log(this.dataSource.data);
       },
