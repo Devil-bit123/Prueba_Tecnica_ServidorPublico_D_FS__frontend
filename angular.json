@@ -16,9 +16,7 @@
             "outputPath": "dist/prueba-tecnica-servidor-publico-d-fs--frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -93,10 +91,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -110,6 +105,13 @@
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://Devil-bit123.github.io/Prueba_Tecnica_ServidorPublico_D_FS__frontend/",
+            "repo":"https://github.com/Devil-bit123/Prueba_Tecnica_ServidorPublico_D_FS__frontend.git"
           }
         }
       }
